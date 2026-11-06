@@ -1,0 +1,61 @@
+{
+  "name": "study-assistant",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "db:up": "docker compose --env-file .env.local up -d --wait",
+    "db:down": "docker compose --env-file .env.local down",
+    "db:psql": "docker exec -it study-db psql -U study -d study",
+    "check:gemini": "node --env-file-if-exists=.env.local --import tsx scripts/check-gemini.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "check:db": "node --env-file-if-exists=.env.local --import tsx scripts/check-db.ts",
+    "check:schema": "node --env-file-if-exists=.env.local --import tsx scripts/check-schema.ts",
+    "worker": "node --env-file-if-exists=.env.local --import tsx worker/index.ts",
+    "worker:dev": "node --watch --env-file-if-exists=.env.local --import tsx worker/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "migrate": "node --env-file-if-exists=.env.local --import tsx scripts/migrate.ts",
+    "start:prod": "node scripts/start-prod.mjs"
+  },
+  "dependencies": {
+    "@ai-sdk/google": "4.0.104",
+    "@ai-sdk/react": "4.0.154",
+    "@google/genai": "^2.32.0",
+    "ai": "7.0.150",
+    "better-auth": "^1.7.17",
+    "drizzle-orm": "^0.45.4",
+    "next": "16.4.3",
+    "pg": "^8.23.1",
+    "pg-boss": "^12.38.1",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "tsx": "4.23.15",
+    "unpdf": "1.9.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@next/env": "16.4.3",
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^24.19.2",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "auth": "1.7.17",
+    "drizzle-kit": "^0.31.11",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.3",
+    "pdf-lib": "1.17.1",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "5.0.5"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}
